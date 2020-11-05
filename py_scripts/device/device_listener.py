@@ -16,10 +16,10 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, msg):
     print(msg.topic + " " + msg.payload.decode("utf-8"))
-    filename = f"./logs_files/{msg.topic}/"
+    filename = f"./log_files/{msg.topic}/"
     os.makedirs(os.path.dirname(filename), exist_ok=True)
     f=open(filename+"logs.txt","w")
-    f.write(msg.topic + " " + msg.payload.decode("utf-8")+'\n')
+    f.write(msg.payload.decode("utf-8")+'\n')
     f.close()
 
 

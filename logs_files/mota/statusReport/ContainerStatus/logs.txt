@@ -1,1 +1,1 @@
-mota/statusReport/ContainerStatus {"type": "statusReport", "targetImage": "eclipse-mosquitto", "imageTag": "1.6", "containerExist": "True", "containerQuantites": "1", "time": "2020/11/05 16:52:51"}
+{"type": "statusReport", "targetImage": "nginx", "imageTag": "latest", "containerExist": "True", "containerQuantites": "1", "time": "2020/11/05 21:58:26"}
