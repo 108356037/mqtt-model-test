@@ -1,0 +1,1 @@
+mota/commandRequest/ContainerStatusRequest {"type": "commandRequest", "command": "/usr/bin/python3 container_spitter.py -i nginx:latest", "description": "request for a target container reqport", "time": "2020/11/05 16:52:51"}

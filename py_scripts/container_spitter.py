@@ -35,20 +35,34 @@ ISOTIMEFORMAT = '%Y/%m/%d %H:%M:%S'
 
 client = mqtt.Client()
 
-client.username_pw_set("try", "xxx")
-
 client.connect("localhost", port=1883, keepalive=60)
 
 args.image_name = args.image_name.strip(' ')
 
-while True:
-    exist, container_numbers = does_container_exist(args.image_name)
-    t = datetime.datetime.now().strftime(ISOTIMEFORMAT)
-    payload = {'targetImage': args.image_name.split(':')[0],
-               'imageTag': args.image_name.split(':')[1],
-               'containerExist': exist,
-               'containerQuantites': container_numbers,
-               'Time': t}
-    print(json.dumps(payload))
-    client.publish("mota/getContainerStatus", json.dumps(payload))
-    time.sleep(5.0)
+if len(args.image_name.split(':')) == 1:
+    raise NameError("Requires both the image and the tag!")
+
+# while True:
+#     exist, container_numbers = does_container_exist(args.image_name)
+#     t = datetime.datetime.now().strftime(ISOTIMEFORMAT)
+#     payload = { 'type': "statusReport",
+#                 'targetImage': args.image_name.split(':')[0],
+#                'imageTag': args.image_name.split(':')[1],
+#                'containerExist': str(exist),
+#                'containerQuantites': str(container_numbers),
+#                'Time': t}
+#     print(json.dumps(payload))
+#     client.publish("mota/statusReport/ContainerStatus", json.dumps(payload))
+#     time.sleep(3.50)
+
+
+exist, container_numbers = does_container_exist(args.image_name)
+t = datetime.datetime.now().strftime(ISOTIMEFORMAT)
+payload = {'type': "statusReport",
+           'targetImage': args.image_name.split(':')[0],
+           'imageTag': args.image_name.split(':')[1],
+           'containerExist': str(exist),
+           'containerQuantites': str(container_numbers),
+           'time': t}
+print(json.dumps(payload))
+client.publish("mota/statusReport/ContainerStatus", json.dumps(payload))
