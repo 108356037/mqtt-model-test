@@ -1,5 +1,6 @@
 import argparse
 import os
+import pathlib
 
 import paho.mqtt.client as mqtt
 
@@ -16,7 +17,8 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, msg):
     print(msg.topic + " " + msg.payload.decode("utf-8"))
-    filename = f"./log_files/{msg.topic}/"
+    curpath = pathlib.Path(__file__).parent.absolute()
+    filename = f"{curpath}/log_files/{msg.topic}/"
     os.makedirs(os.path.dirname(filename), exist_ok=True)
     f=open(filename+"logs.txt","w")
     f.write(msg.payload.decode("utf-8")+'\n')

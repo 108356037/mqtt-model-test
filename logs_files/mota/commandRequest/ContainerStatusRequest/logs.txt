@@ -1,1 +1,0 @@
-{"type": "commandRequest", "command": "/usr/bin/python3 container_status_reporter.py -i nginx:1.6.0", "description": "request for a target container report", "time": "2020/11/05 17:59:58"}
