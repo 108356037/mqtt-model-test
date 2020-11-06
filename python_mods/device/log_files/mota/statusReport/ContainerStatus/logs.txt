@@ -1,1 +1,0 @@
-{"type": "statusReport", "targetImage": "nginx", "imageTag": "latest", "containerExist": "True", "containerQuantites": "3", "time": "2020/11/06 17:34:45"}

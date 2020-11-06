@@ -51,6 +51,6 @@ if __name__ == "__main__" :
     payload = reporter.submit_report()
     print(json.dumps(payload))
     reporter.client.publish(
-        "mota/statusReport/ContainerStatus", json.dumps(payload))
+        "mota/report/containerStatus", json.dumps(payload))
             
 

@@ -24,5 +24,5 @@ if args.module == "containerStatusCheck":
 requester.construct_request()
 payload = requester.submit_request()
 print(json.dumps(payload))
-requester.client.publish("mota/commandRequest/ContainerStatusRequest",
+requester.client.publish("mota/request/containerStatusRequest",
                          json.dumps(payload))
