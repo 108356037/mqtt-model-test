@@ -1,1 +1,1 @@
-{"type": "commandRequest", "command": "/usr/bin/python3 /home/fighter158/Desktop/mqtt-mota/python_mods/device/command_pool/container_status_check.py -i nginx:latest", "description": "request for a target container report", "time": "2020/11/06 17:29:41"}
+{"type": "commandRequest", "command": "/usr/bin/python3 /home/fighter158/Desktop/mqtt-mota/python_mods/device/command_pool/container_status_check.py -i nginx:latest", "description": "request for a target container report", "time": "2020/11/06 17:34:43"}

@@ -10,5 +10,5 @@ path = str(path)+'/log_files/mota/commandRequest/ContainerStatusRequest/logs.txt
 with open(path,'r') as f:
     cmd = f.readlines()
     cmd = json.loads(cmd[0].strip('\n'))['command'].split(' ')
-    logging.critical(subprocess.call(cmd,stdout=subprocess.PIPE, stderr=subprocess.STDOUT))
+    subprocess.call(cmd,stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     f.close()
