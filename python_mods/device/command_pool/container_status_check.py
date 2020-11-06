@@ -15,6 +15,7 @@ parser.add_argument(
 
 args = parser.parse_args()
 
+
 class container_reporter(basic_reporter):
 
     def __init__(self, image, shell="/bin/bash", host="localhost"):
@@ -45,12 +46,10 @@ class container_reporter(basic_reporter):
         self.report['time'] = self.provide_timestamp()
 
 
-if __name__ == "__main__" :
+if __name__ == "__main__":
     reporter = container_reporter(args.image)
     reporter.construct_report()
     payload = reporter.submit_report()
     print(json.dumps(payload))
     reporter.client.publish(
         "mota/report/containerStatus", json.dumps(payload))
-            
-

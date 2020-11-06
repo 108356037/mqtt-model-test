@@ -25,27 +25,3 @@ class basic_reporter():
     def construct_report(self):
         # store the data in self.report based on each case
         pass
-
-
-
-
-
-# args = parser.parse_args()
-
-# args.image_name = args.image_name.strip(' ')
-
-# if len(args.image_name.split(':')) == 1:
-#     raise NameError("Requires both the image and the tag!")
-
-# reporter = container_reporter(args.image_name,)
-# exist, container_numbers = reporter.does_container_exist()
-
-# payload = {'type': "statusReport",
-#            'targetImage': args.image_name.split(':')[0],
-#            'imageTag': args.image_name.split(':')[1],
-#            'containerExist': str(exist),
-#            'containerQuantites': str(container_numbers),
-#            'time': reporter.provide_timestamp()}
-
-# print(json.dumps(payload))
-# reporter.client.publish("mota/statusReport/ContainerStatus", json.dumps(payload))
