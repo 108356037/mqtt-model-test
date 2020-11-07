@@ -73,13 +73,16 @@ class container_reporter(basic_reporter):
                                 stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         buf = io.StringIO(result.stdout.decode('utf-8'))
         for line in buf.readlines()[1:]:
-            res = ' '.join(line.split()).split()
-            img_name, img_tag = res[1].split(':')[0], res[1].split(':')[1]
-            target_img = self.request_payload['requireInfo']['image']
-            target_tag = self.request_payload['requireInfo']['imageTag']
-            if (img_name, img_tag) == (target_img, target_tag):
-                exist_flag = True
-                container_counter += 1
+            try:
+                res = ' '.join(line.split()).split()
+                img_name, img_tag = res[1].split(':')[0], res[1].split(':')[1]
+                target_img = self.request_payload['requireInfo']['image']
+                target_tag = self.request_payload['requireInfo']['imageTag']
+                if (img_name, img_tag) == (target_img, target_tag):
+                    exist_flag = True
+                    container_counter += 1
+            except:
+                print(f"wrong, container image: {res[1]}")
         return exist_flag, container_counter
 
     def construct_major_report(self):

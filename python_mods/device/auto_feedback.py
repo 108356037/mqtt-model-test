@@ -1,16 +1,17 @@
 import json
 import logging
-import inspect, os.path
+import inspect
+import os.path
 
 import reporter_modules as rm
 
-module_dict = {'containerStatusCheck':rm.container_reporter}
+module_dict = {'containerStatusCheck': rm.container_reporter}
 
 filename = inspect.getframeinfo(inspect.currentframe()).filename
 path = os.path.dirname(os.path.abspath(filename))
 
 
-with open(path+"/log_files/logs.txt","r") as f:
+with open(path+"/log_files/logs.txt", "r") as f:
     payload = f.readlines()
     payload = json.loads(payload[-1].strip('\n'))
     reporter = module_dict[payload["module"]](payload)
@@ -19,6 +20,4 @@ with open(path+"/log_files/logs.txt","r") as f:
     reporter.connect()
     report = reporter.submit_report()
     print(json.dumps(report))
-    print(reporter.module_pool)
     reporter.client.publish(reporter.publish_path, json.dumps(report))
-

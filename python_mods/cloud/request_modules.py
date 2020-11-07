@@ -24,7 +24,7 @@ class basic_requester():
     def submit_request(self):
         return self.request
 
-    def construct_request(self):
+    def construct_major_info(self):
         '''
         store the data in self.payload, structured as below:
         {
@@ -38,7 +38,7 @@ class basic_requester():
         '''
         pass
 
-    def construct_info_required(self):
+    def construct_detail_info(self):
         pass
 
 
