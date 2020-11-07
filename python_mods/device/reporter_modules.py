@@ -64,7 +64,7 @@ class container_reporter(basic_reporter):
     def __init__(self, request_payload, shell="/bin/bash"):
         super().__init__(request_payload, shell)
         self.report['reportContent'] = {}
-        self.publish_path = "mota/report/containerStatus"
+        self.publish_path = "mota/report/containerStatusCheck"
 
     def does_container_exist(self):
         exist_flag = False
@@ -94,5 +94,7 @@ class container_reporter(basic_reporter):
     def construct_detail_report(self):
         exist, container_numbers = self.does_container_exist()
         detail_report = self.report['reportContent']
+        detail_report['image'] = self.request_payload['requireInfo']['image']
+        detail_report['imageTag'] = self.request_payload['requireInfo']['imageTag']
         detail_report['containerExist'] = str(exist)
         detail_report['containerQuantites'] = str(container_numbers)

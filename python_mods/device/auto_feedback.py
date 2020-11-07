@@ -19,5 +19,5 @@ with open(path+"/log_files/logs.txt", "r") as f:
     reporter.construct_major_report()
     reporter.connect()
     report = reporter.submit_report()
-    print(json.dumps(report))
+    print(json.dumps(report, indent=4))
     reporter.client.publish(reporter.publish_path, json.dumps(report))

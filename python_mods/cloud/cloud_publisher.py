@@ -1,7 +1,9 @@
 import argparse
 import json
 
-import request_modules
+import request_modules as rm
+
+module_dict = {'containerStatusCheck': rm.container_checker}
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -20,12 +22,11 @@ if(args.image):
 
 args.module = args.module.strip(' ')
 
-if args.module == "containerStatusCheck":
-    requester = request_modules.container_checker(image=args.image, host=args.host)
 
-requester.connect()
+requester = module_dict[args.module](image=args.image, host=args.host)
 requester.construct_detail_info()
 requester.construct_major_info()
+requester.connect()
 payload = requester.submit_request()
-print(json.dumps(payload))
+print(json.dumps(payload, indent=4))
 requester.client.publish(requester.publish_path, json.dumps(payload))

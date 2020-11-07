@@ -1,6 +1,7 @@
 import argparse
 import os
 import pathlib
+import json
 
 import paho.mqtt.client as mqtt
 
@@ -19,7 +20,9 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, msg):
-    print(msg.topic + " " + msg.payload.decode("utf-8"))
+    print(f"received message payload from {msg.topic} \n")
+    print(json.dumps(json.loads(msg.payload), indent=4, sort_keys=True))
+    print("="*79)
     curpath = pathlib.Path(__file__).parent.absolute()
     filename = f"{curpath}/log_files/"
     os.makedirs(os.path.dirname(filename), exist_ok=True)
