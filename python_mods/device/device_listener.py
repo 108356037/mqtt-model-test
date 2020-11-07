@@ -21,7 +21,7 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):
     print(msg.topic + " " + msg.payload.decode("utf-8"))
     curpath = pathlib.Path(__file__).parent.absolute()
-    filename = f"{curpath}/log_files/{msg.topic}/"
+    filename = f"{curpath}/log_files/"
     os.makedirs(os.path.dirname(filename), exist_ok=True)
     f = open(filename+"logs.txt", "w")
     f.write(msg.payload.decode("utf-8")+'\n')

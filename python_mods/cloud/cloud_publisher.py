@@ -1,7 +1,7 @@
 import argparse
 import json
 
-import cloud_publish_modules
+import request_modules
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -21,11 +21,11 @@ if(args.image):
 args.module = args.module.strip(' ')
 
 if args.module == "containerStatusCheck":
-    requester = cloud_publish_modules.container_checker(image=args.image, host=args.host)
+    requester = request_modules.container_checker(image=args.image, host=args.host)
 
 requester.connect()
-requester.construct_request()
+requester.construct_detail_info()
+requester.construct_major_info()
 payload = requester.submit_request()
 print(json.dumps(payload))
-requester.client.publish("mota/request/containerStatusRequest",
-                         json.dumps(payload))
+requester.client.publish(requester.publish_path, json.dumps(payload))
