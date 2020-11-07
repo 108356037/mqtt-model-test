@@ -12,14 +12,16 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument(
     "-i", "--image", help="the target container's image, including the image tag", type=str)
+parser.add_argument(
+    "--host", help="mqtt broker ip", type=str)
 
 args = parser.parse_args()
 
 
 class container_reporter(basic_reporter):
 
-    def __init__(self, image, shell="/bin/bash", host="localhost"):
-        super().__init__(shell, host)
+    def __init__(self, image, host, shell="/bin/bash"):
+        super().__init__(host, shell)
         self.image = image
 
     def does_container_exist(self):
@@ -47,7 +49,8 @@ class container_reporter(basic_reporter):
 
 
 if __name__ == "__main__":
-    reporter = container_reporter(args.image)
+    reporter = container_reporter(image=args.image, host=args.host)
+    reporter.connect()
     reporter.construct_report()
     payload = reporter.submit_report()
     print(json.dumps(payload))
