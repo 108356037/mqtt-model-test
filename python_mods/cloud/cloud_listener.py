@@ -8,7 +8,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument(
     "-t", "--topic_name", help="the topic to subscribe to", type=str,  required=True)
 parser.add_argument(
-     "--host", help="mqtt broker ip", type=str, default="localhost")
+    "--host", help="mqtt broker ip", type=str, default="localhost")
 
 
 def on_connect(client, userdata, flags, rc):

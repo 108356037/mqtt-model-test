@@ -8,6 +8,9 @@ parser = argparse.ArgumentParser()
 parser.add_argument(
     "-t", "--topic_name", help="the topic to subscribe to", type=str,  required=True)
 
+parser.add_argument(
+    "--host", help="mqtt broker ip", type=str, default="localhost")
+
 
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
@@ -27,7 +30,8 @@ def on_message(client, userdata, msg):
 
 args = parser.parse_args()
 args.topic_name = args.topic_name.strip(' ')
-print(args.topic_name)
+args.host = args.host.strip(' ')
+print(f"subscribe to {args.topic_name} on {args.host}:1883")
 
 client = mqtt.Client()
 
@@ -35,6 +39,6 @@ client.on_connect = on_connect
 
 client.on_message = on_message
 
-client.connect("localhost", port=1883, keepalive=60)
+client.connect(args.host, port=1883, keepalive=60)
 
 client.loop_forever()
