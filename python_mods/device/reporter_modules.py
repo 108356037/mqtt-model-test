@@ -81,8 +81,11 @@ class container_reporter(basic_reporter):
                 if (img_name, img_tag) == (target_img, target_tag):
                     exist_flag = True
                     container_counter += 1
+                    print(f"container id: {res[0]} .... \u2714")
+                else:
+                    print(f"container id: {res[0]} .... \u2718")
             except:
-                print(f"wrong, container image: {res[1]}")
+                print(f"container id: {res[0]} .... \u2718")
         return exist_flag, container_counter
 
     def construct_major_report(self):
