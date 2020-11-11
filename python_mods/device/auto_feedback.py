@@ -1,4 +1,5 @@
 import json
+import pprint
 import logging
 import inspect
 import os.path
@@ -16,9 +17,9 @@ with open(path+"/log_files/logs.txt", "r") as f:
     payload = json.loads(payload[-1].strip('\n'))
     reporter = module_dict[payload["module"]](payload)
     reporter.construct_detail_report()
-    reporter.construct_major_report()
+    #reporter.construct_major_report()
     reporter.connect()
     report = reporter.submit_report()
-    # print(json.dumps(report, indent=4))
+    pprint.pprint(report)
     print('='*79)
     reporter.client.publish(reporter.publish_path, json.dumps(report))

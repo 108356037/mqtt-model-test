@@ -5,6 +5,7 @@ import json
 import os
 import subprocess
 from pathlib import Path
+import logging
 
 import paho.mqtt.client as mqtt
 
@@ -18,24 +19,13 @@ parser = argparse.ArgumentParser()
 args = parser.parse_args()
 
 
-'''
-reporter機制：
-
-1. 基於module種類去建構reporter
-
-2. construct major/detail report 兩個func 把該回報的值處理好包成dict
-
-3. 把 report submit 給 mqtt broker
-
-'''
-
 
 class basic_reporter():
 
     def __init__(self, request_payload, shell="/bin/bash"):
         self.shell = shell
         self.client = mqtt.Client(client_id = "thing:syjmHv7z-")
-        self.client.username_pw_set("syjmHv7z-", "ZCsC5XNCsk~mzrsy")
+        #logging.critical(self.client.username_pw_set("syjmHv7z-", "ZCsC5XNCsk~mzrsy"))
         self.report = {}
         self.module_pool = str(Path().absolute())
         self.request_payload = request_payload
@@ -47,8 +37,9 @@ class basic_reporter():
         return t
 
     def connect(self):
-        self.client.connect(
-            self.request_payload['brokerHost'], port=1883, keepalive=60)
+        self.client.username_pw_set("syjmHv7z-", "ZCsC5XNCsk~mzrsy")
+        
+        self.client.connect("mqtt.paas.oringnet.cloud",port=1883, keepalive=60)
 
     def submit_report(self):
         return self.report
@@ -98,10 +89,11 @@ class container_reporter(basic_reporter):
 
     def construct_detail_report(self):
         exist, container_numbers = self.does_container_exist()
-        detail_report = self.report['reportContent']
+        detail_report = self.report['value']
         detail_report['image'] = self.request_payload['requireInfo']['image']
         detail_report['imageTag'] = self.request_payload['requireInfo']['imageTag']
         detail_report['containerExist'] = str(exist)
         detail_report['containerQuantites'] = str(container_numbers)
+        self.report['value'] = json.dumps(self.report['value'])
 
-rm = container_reporter()
+#rm = container_reporter()
