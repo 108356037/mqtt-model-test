@@ -34,7 +34,8 @@ class basic_reporter():
 
     def __init__(self, request_payload, shell="/bin/bash"):
         self.shell = shell
-        self.client = mqtt.Client()
+        self.client = mqtt.Client(client_id = "thing:syjmHv7z-")
+        self.client.username_pw_set("syjmHv7z-", "ZCsC5XNCsk~mzrsy")
         self.report = {}
         self.module_pool = str(Path().absolute())
         self.request_payload = request_payload
@@ -63,8 +64,9 @@ class container_reporter(basic_reporter):
 
     def __init__(self, request_payload, shell="/bin/bash"):
         super().__init__(request_payload, shell)
-        self.report['reportContent'] = {}
-        self.publish_path = "mota/report/containerStatusCheck"
+        self.report['id'] = "test"
+        self.report['value'] = {}
+        self.publish_path = "$thing/syjmHv7z-/$data/report"
 
     def does_container_exist(self):
         exist_flag = False
@@ -101,3 +103,5 @@ class container_reporter(basic_reporter):
         detail_report['imageTag'] = self.request_payload['requireInfo']['imageTag']
         detail_report['containerExist'] = str(exist)
         detail_report['containerQuantites'] = str(container_numbers)
+
+rm = container_reporter()
