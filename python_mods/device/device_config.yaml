@@ -1,0 +1,8 @@
+mqtt:
+  client_id: "thing:syjmHv7z-"
+  host: "mqtt.paas.oringnet.cloud"
+  port: 1883
+  username: "syjmHv7z-"
+  userpw: "ZCsC5XNCsk~mzrsy"
+  keepalive: 60
+

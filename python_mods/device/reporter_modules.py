@@ -1,4 +1,3 @@
-import argparse
 import datetime
 import io
 import json
@@ -8,16 +7,6 @@ from pathlib import Path
 import logging
 
 import paho.mqtt.client as mqtt
-
-parser = argparse.ArgumentParser()
-
-# parser.add_argument(
-#     "-i", "--image", help="the target container's image, including the image tag", type=str)
-# parser.add_argument(
-#     "--host", help="mqtt broker ip", type=str)
-
-args = parser.parse_args()
-
 
 
 class basic_reporter():
