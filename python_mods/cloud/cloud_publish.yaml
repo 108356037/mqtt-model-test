@@ -1,0 +1,28 @@
+connect_mods:  
+  mqtt:
+    oringpass:
+      client_id: "thing:syjmHv7z-"
+      host: "mqtt.paas.oringnet.cloud"
+      port: 1883
+      username: "syjmHv7z-"
+      userpw: "ZCsC5XNCsk~mzrsy"
+      keepalive: 60
+      topic:
+        Command: "$thing/syjmHv7z-/$cmd/$downlink/"
+        Downlink config: "$thing/syjmHv7z-/$conf/$expected/"
+        Uplink config: "$thing/syjmHv7z-/$conf/$reported/"
+        Data: "$thing/syjmHv7z-/$data/"
+      publish_path:
+        bucket1: "request"
+    localdev:
+      host: "localhost"
+      port: 1883
+      keepalive: 60
+#############################################################################
+payload_construct_mods:
+  container_status_check:
+      id: "container_status_check"
+      value: 
+          target_image: k8s/gcr.io/pause
+          target_image_tag: al101112
+    
